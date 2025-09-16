@@ -1,0 +1,6 @@
+event_id,participant_id,bonus_type,points,timestamp
+1,1,Pre-event Workshop,5,2023-10-26T10:00:00Z
+2,3,Best Pitch,10,2023-10-27T18:00:00Z
+3,5,Community Contribution,5,2023-10-27T19:00:00Z
+4,7,Pre-event Workshop,5,2023-10-26T11:00:00Z
+5,2,Best Pitch,10,2023-10-27T18:05:00Z

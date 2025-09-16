@@ -1,0 +1,226 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_GRAFANACLOUD-DATASOURCES-DEMO",
+      "label": "grafanacloud-datasources-demo",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "testdata",
+      "pluginName": "TestData DB"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.2"
+    },
+    {
+      "type": "datasource",
+      "id": "testdata",
+      "name": "TestData DB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "id": 1,
+      "gridPos": { "h": 4, "w": 24, "x": 0, "y": 0 },
+      "type": "text",
+      "title": "Hackathon Dashboard",
+      "options": {
+        "content": "# 🏆 Hackathon Scoreboard\nThis dashboard provides a real-time overview of the hackathon scores, judge activity, and team rankings.",
+        "mode": "markdown"
+      }
+    },
+    {
+      "id": 2,
+      "title": "🏆 Top 3 Teams",
+      "type": "stat",
+      "gridPos": { "h": 5, "w": 8, "x": 0, "y": 4 },
+      "options": { "colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": { "calcs": ["last"], "fields": "", "values": false }, "textMode": "auto" },
+      "targets": [{
+        "refId": "A",
+        "datasource": { "type": "testdata", "uid": "gdev-testdata" },
+        "scenarioId": "csv_content",
+        "csvContent": "team_name,total_score\nData Dynamos,90.4\nQuantum Coders,91.25\nCode Wizards,85.55"
+      }],
+      "transformations": [
+        { "id": "sortBy", "options": { "sort": [{ "field": "total_score", "reverse": true }] }},
+        { "id": "limit", "options": { "limit": 1 } }
+      ]
+    },
+    {
+      "id": 3,
+      "title": " ",
+      "type": "stat",
+      "gridPos": { "h": 5, "w": 8, "x": 8, "y": 4 },
+      "options": { "colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": { "calcs": ["last"], "fields": "", "values": false }, "textMode": "auto" },
+      "targets": [{
+        "refId": "A",
+        "datasource": { "type": "testdata", "uid": "gdev-testdata" },
+        "scenarioId": "csv_content",
+        "csvContent": "team_name,total_score\nData Dynamos,90.4\nQuantum Coders,91.25\nCode Wizards,85.55"
+      }],
+      "transformations": [
+        { "id": "sortBy", "options": { "sort": [{ "field": "total_score", "reverse": true }] }},
+        { "id": "limit", "options": { "limit": 2 } },
+        { "id": "filterByValue", "options": { "filters": [{ "config": { "id": "filter-items-by-row-index", "options": { "include": "1" }}, "field": "total_score" }]}}
+      ]
+    },
+    {
+      "id": 4,
+      "title": " ",
+      "type": "stat",
+      "gridPos": { "h": 5, "w": 8, "x": 16, "y": 4 },
+      "options": { "colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": { "calcs": ["last"], "fields": "", "values": false }, "textMode": "auto" },
+      "targets": [{
+        "refId": "A",
+        "datasource": { "type": "testdata", "uid": "gdev-testdata" },
+        "scenarioId": "csv_content",
+        "csvContent": "team_name,total_score\nData Dynamos,90.4\nQuantum Coders,91.25\nCode Wizards,85.55"
+      }],
+      "transformations": [
+        { "id": "sortBy", "options": { "sort": [{ "field": "total_score", "reverse": true }] }},
+        { "id": "limit", "options": { "limit": 3 } },
+        { "id": "filterByValue", "options": { "filters": [{ "config": { "id": "filter-items-by-row-index", "options": { "include": "2" }}, "field": "total_score" }]}}
+      ]
+    },
+    {
+      "id": 5,
+      "title": "🏆 Leaderboard",
+      "type": "table",
+      "gridPos": { "h": 12, "w": 14, "x": 0, "y": 9 },
+      "description": "Total Score = SUM(Score * Weight) + Bonus. Assumes CSVs are loaded into a queryable data source.",
+      "targets": [
+        {
+          "refId": "LeaderboardQuery",
+          "datasource": { "type": "testdata", "uid": "gdev-testdata" },
+          "scenarioId": "csv_content",
+          "csvContent": "team_name,total_score,category\nData Dynamos,90.4,Data Science\nQuantum Coders,91.25,Blockchain\nCode Wizards,85.55,AI & ML\nAPI Avengers,92.5,FinTech\nFintech Fusion,84.45,FinTech\nDesign Mavericks,93.5,UI/UX\nML Mavericks,93.5,AI & ML\nBug Busters,82.5,Developer Tools\nCloud Crusaders,79.25,Cloud Native\nPixel Pioneers,84.4,UI/UX"
+        }
+      ],
+      "transformations": [
+        { "id": "sortBy", "options": { "sort": [{ "field": "total_score", "reverse": true }] }},
+        { "id": "addRowIndex", "options": { "fieldName": "Rank" } }
+      ],
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "thresholds" }, "mappings": [], "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "red", "value": 80 }] } },
+        "overrides": [
+            { "matcher": { "id": "byName", "options": "total_score" }, "properties": [{ "id": "unit", "value": "short" }, { "id": "decimals", "value": 2 }] }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "title": "📊 Team Scores",
+      "type": "barchart",
+      "gridPos": { "h": 12, "w": 10, "x": 14, "y": 9 },
+      "options": { "legend": { "displayMode": "hidden" }, "orientation": "horizontal", "valueOptions": { "unit": "short" } },
+      "targets": [
+        {
+          "refId": "LeaderboardQuery",
+          "datasource": { "type": "testdata", "uid": "gdev-testdata" },
+          "scenarioId": "csv_content",
+          "csvContent": "team_name,total_score\nData Dynamos,90.4\nQuantum Coders,91.25\nCode Wizards,85.55\nAPI Avengers,92.5\nFintech Fusion,84.45\nDesign Mavericks,93.5\nML Mavericks,93.5\nBug Busters,82.5\nCloud Crusaders,79.25\nPixel Pioneers,84.4"
+        }
+      ],
+      "transformations": [
+        { "id": "sortBy", "options": { "sort": [{ "field": "total_score", "reverse": false }] }}
+      ]
+    },
+    {
+        "id": 7,
+        "title": "⏱ Submissions Progress",
+        "type": "gauge",
+        "gridPos": { "h": 6, "w": 6, "x": 0, "y": 21 },
+        "options": { "reduceOptions": { "calcs": ["last"], "fields": "", "values": false }, "showThresholdLabels": false, "showThresholdMarkers": true, "orientation": "auto" },
+        "targets": [{
+            "refId": "A",
+            "datasource": { "type": "testdata", "uid": "gdev-testdata" },
+            "scenarioId": "csv_content",
+            "csvContent": "value\n80"
+        }],
+        "fieldConfig": { "defaults": { "unit": "percent", "min": 0, "max": 100 } }
+    },
+    {
+        "id": 8,
+        "title": "📉 Judge Bias (Avg. Score Delta)",
+        "type": "barchart",
+        "gridPos": { "h": 6, "w": 9, "x": 6, "y": 21 },
+        "options": { "valueOptions": { "unit": "short" }, "legend": { "displayMode": "hidden" } },
+        "targets": [{
+            "refId": "A",
+            "datasource": { "type": "testdata", "uid": "gdev-testdata" },
+            "scenarioId": "csv_content",
+            "csvContent": "judge,delta\nDr. Evelyn Reed,-1.5\nProf. Samuel Chen,0.5\nMs. Isabella Rossi,1.0"
+        }]
+    },
+    {
+      "id": 9,
+      "title": "📈 Judge vs Criteria Heatmap (Avg Scores)",
+      "type": "heatmap",
+      "gridPos": { "h": 6, "w": 9, "x": 15, "y": 21 },
+      "options": { "calculate": false, "showValue": true },
+      "targets": [{
+        "refId": "A",
+        "datasource": { "type": "testdata", "uid": "gdev-testdata" },
+        "scenarioId": "csv_content",
+        "csvContent": "criteria,Dr. Evelyn Reed,Prof. Samuel Chen,Ms. Isabella Rossi\nInnovation,82.5,86.5,87.5\nTechnical Execution,82.5,84.0,88.25\nPresentation,84.75,88.5,87.5\nViability,85.0,91.5,90.0"
+      }],
+      "transformations": [{ "id": "seriesToRows" }]
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": ["hackathon", "scoreboard"],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Hackathon Scoreboard",
+  "uid": "hackathon-dashboard",
+  "version": 1,
+  "weekStart": ""
+}

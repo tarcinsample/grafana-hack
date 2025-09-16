@@ -1,0 +1,5 @@
+criteria_id,criteria_name,weightage
+1,Innovation,0.30
+2,Technical Execution,0.35
+3,Presentation,0.20
+4,Viability,0.15

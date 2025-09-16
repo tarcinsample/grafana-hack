@@ -1,0 +1,11 @@
+participant_id,team_name,category,members
+1,Code Wizards,AI & ML,"Alice,Bob,Charlie"
+2,Data Dynamos,Data Science,"David,Eve,Frank"
+3,Pixel Pioneers,UI/UX,"Grace,Heidi,Ivan"
+4,Quantum Coders,Blockchain,"Judy,Mallory,Mike"
+5,Cloud Crusaders,Cloud Native,"Nancy,Oscar,Peggy"
+6,Bug Busters,Developer Tools,"Pat,Quentin,Rupert"
+7,API Avengers,FinTech,"Steve,Trent,Ulysses"
+8,Design Mavericks,UI/UX,"Victor,Walter,Xena"
+9,ML Mavericks,AI & ML,"Yara,Zane,Amy"
+10,Fintech Fusion,FinTech,"Brian,Carla,Diana"
